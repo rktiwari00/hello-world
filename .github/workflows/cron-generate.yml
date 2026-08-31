@@ -9,9 +9,29 @@ jobs:
   run-generator:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Article Generator API
-        run: |
-          curl --fail --max-time 300 \
-               -X GET \
-               -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
-               ${{ secrets.API_URL_GENERATE_ARTICLE }}
+      - name: Checkout private repository
+        uses: actions/checkout@v4
+        with:
+          repository: 'rktiwari00/sarakari-space-next-js-version'
+          token: ${{ secrets.PRIVATE_REPO_PAT }}
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Run Generate Article Script
+        env:
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GOOGLE_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
+          FIREBASE_ADMIN_CREDENTIALS: ${{ secrets.FIREBASE_ADMIN_CREDENTIALS }}
+          CLOUDFLARE_R2_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY }}
+          CLOUDFLARE_R2_SECRET_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_KEY }}
+          CLOUDFLARE_R2_BUCKET_NAME: ${{ secrets.CLOUDFLARE_R2_BUCKET_NAME }}
+          NEXTAUTH_URL: "https://www.sarkari.space"
+        run: npx tsx scripts/run-generate-article.ts
