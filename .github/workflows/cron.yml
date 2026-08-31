@@ -30,6 +30,11 @@ jobs:
           MONGO_URI: ${{ secrets.MONGO_URI }}
           NEXT_PUBLIC_FIREBASE_VAPID_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_VAPID_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_ARTICLE: ${{ secrets.GEMINI_API_KEY_ARTICLE }}
+          GEMINI_API_KEY_TOPIC: ${{ secrets.GEMINI_API_KEY_TOPIC }}
+          GEMINI_IMAGE_API_KEY: ${{ secrets.GEMINI_IMAGE_API_KEY }}
+          OMNIROUTE_API_KEY: ${{ secrets.OMNIROUTE_API_KEY }}
+          FAILOVER_API_KEYS: ${{ secrets.FAILOVER_API_KEYS }}
           GOOGLE_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
           FIREBASE_ADMIN_CREDENTIALS: ${{ secrets.FIREBASE_ADMIN_CREDENTIALS }}
           NEXTAUTH_URL: "https://www.sarkari.space"
