@@ -35,7 +35,8 @@ jobs:
           GEMINI_IMAGE_API_KEY: ${{ secrets.GEMINI_IMAGE_API_KEY }}
           OMNIROUTE_API_KEY: ${{ secrets.OMNIROUTE_API_KEY }}
           FAILOVER_API_KEYS: ${{ secrets.FAILOVER_API_KEYS }}
-          GOOGLE_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
-          FIREBASE_ADMIN_CREDENTIALS: ${{ secrets.FIREBASE_ADMIN_CREDENTIALS }}
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+          FIREBASE_CLIENT_EMAIL: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
+          FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
           NEXTAUTH_URL: "https://www.sarkari.space"
         run: npx tsx scripts/run-fetch-jobs.ts
