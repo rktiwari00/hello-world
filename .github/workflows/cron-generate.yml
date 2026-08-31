@@ -1,0 +1,17 @@
+name: Sarkari Article Generator Cron
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+jobs:
+  run-generator:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Article Generator API
+        run: |
+          curl --fail --max-time 300 \
+               -X GET \
+               -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+               ${{ secrets.API_URL_GENERATE_ARTICLE }}

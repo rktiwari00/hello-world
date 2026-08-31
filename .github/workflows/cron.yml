@@ -1,0 +1,17 @@
+name: Sarkari News Scraper Cron
+
+on:
+  schedule:
+    - cron: '0 */4 * * *'
+  workflow_dispatch:
+
+jobs:
+  run-scraper:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Scraper API
+        run: |
+          curl --fail --max-time 300 \
+               -X GET \
+               -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+               ${{ secrets.API_URL_FETCH_JOBS }}
