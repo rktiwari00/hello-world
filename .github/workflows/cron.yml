@@ -9,34 +9,9 @@ jobs:
   run-scraper:
     runs-on: ubuntu-latest
     steps:
-        # You MUST configure the PRIVATE_REPO_PAT secret in GitHub for this to work!
-      - name: Checkout private repository
-        uses: actions/checkout@v4
-        with:
-          repository: 'rktiwari00/sarakari-space-next-js-version'
-          token: ${{ secrets.PRIVATE_REPO_PAT }}
-          
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          
-      - name: Install dependencies
-        run: npm ci
-        
-      - name: Run Fetch Sarkari Jobs Script
-        env:
-          MONGO_URI: ${{ secrets.MONGO_URI }}
-          NEXT_PUBLIC_FIREBASE_VAPID_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_VAPID_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_API_KEY_ARTICLE: ${{ secrets.GEMINI_API_KEY_ARTICLE }}
-          GEMINI_API_KEY_TOPIC: ${{ secrets.GEMINI_API_KEY_TOPIC }}
-          GEMINI_IMAGE_API_KEY: ${{ secrets.GEMINI_IMAGE_API_KEY }}
-          OMNIROUTE_API_KEY: ${{ secrets.OMNIROUTE_API_KEY }}
-          FAILOVER_API_KEYS: ${{ secrets.FAILOVER_API_KEYS }}
-          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
-          FIREBASE_CLIENT_EMAIL: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
-          FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
-          NEXTAUTH_URL: "https://www.sarkari.space"
-        run: npx tsx scripts/run-fetch-jobs.ts
+      - name: Trigger Scraper API
+        run: |
+          curl --fail --max-time 300 \
+               -X GET \
+               -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+               ${{ secrets.API_URL_FETCH_JOBS }}
