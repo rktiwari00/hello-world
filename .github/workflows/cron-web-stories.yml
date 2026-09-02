@@ -1,0 +1,36 @@
+name: Generate Web Stories Cron
+
+on:
+  schedule:
+    # Runs every hour
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+jobs:
+  run-generate-web-stories:
+    runs-on: ubuntu-latest
+    steps:
+        # You MUST configure the PRIVATE_REPO_PAT secret in GitHub for this to work!
+      - name: Checkout private repository
+        uses: actions/checkout@v4
+        with:
+          repository: 'rktiwari00/sarakari-space-next-js-version'
+          token: ${{ secrets.PRIVATE_REPO_PAT }}
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Run Generate Web Stories Script
+        env:
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+          NEXT_PUBLIC_APP_URL: "https://www.sarkari.space"
+        run: npx tsx scripts/run-generate-web-stories.ts
