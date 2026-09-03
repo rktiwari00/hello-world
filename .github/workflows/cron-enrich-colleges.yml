@@ -2,8 +2,8 @@ name: College Enrichment Cron
 
 on:
   schedule:
-    # Run twice a day (e.g. 2:00 AM and 2:00 PM UTC)
-    - cron: '0 2,14 * * *'
+    # Run every day at midnight UTC
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
@@ -25,18 +25,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
         
-      - name: Run College Enrichment Script
+      - name: Download Google Sheet CSV
+        run: curl -L -o colleges_enriched.csv "https://docs.google.com/spreadsheets/d/1U6u3-6DC63Uj-xAjNBYlpgaasBxOVJ6q099nqpzGYgI/export?format=csv"
+        
+      - name: Run College Import Script
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
           COLLEGE_MONGO_URI: ${{ secrets.COLLEGE_MONGO_URI }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          OMNIROUTE_API_KEY: ${{ secrets.OMNIROUTE_API_KEY }}
-          OMNIROUTE_URL: ${{ secrets.OMNIROUTE_URL }}
-          FAILOVER_API_KEYS: ${{ secrets.FAILOVER_API_KEYS }}
-          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
-          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-          R2_BUCKET_NAME: ${{ secrets.R2_BUCKET_NAME }}
-          R2_PUBLIC_DOMAIN: ${{ secrets.R2_PUBLIC_DOMAIN }}
-          NEXTAUTH_URL: "https://www.sarkari.space"
-        run: npx tsx scripts/run-enrich-colleges.ts
+        run: npx tsx scripts/import-colleges.ts
