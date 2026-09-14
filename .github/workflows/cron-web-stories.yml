@@ -30,6 +30,7 @@ jobs:
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          NARAAI: ${{ secrets.NARAAI }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
           NEXT_PUBLIC_APP_URL: "https://www.sarkari.space"
