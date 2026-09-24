@@ -55,4 +55,5 @@ jobs:
           TWITTER_CT0: ${{ secrets.TWITTER_CT0 }}
           GOOGLE_ALERTS_RSS_URL: ${{ secrets.GOOGLE_ALERTS_RSS_URL }}
           NEXTAUTH_URL: "https://www.sarkari.space"
+          PRIVATE_REPO_PAT: ${{ secrets.PRIVATE_REPO_PAT }}
         run: npx tsx scripts/run-generate-article.ts

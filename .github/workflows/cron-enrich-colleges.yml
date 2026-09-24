@@ -32,4 +32,5 @@ jobs:
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
           COLLEGE_MONGO_URI: ${{ secrets.COLLEGE_MONGO_URI }}
+          PRIVATE_REPO_PAT: ${{ secrets.PRIVATE_REPO_PAT }}
         run: npx tsx scripts/import-colleges.ts
