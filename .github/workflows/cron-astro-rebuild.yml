@@ -2,8 +2,8 @@ name: Astro Static Site Rebuild Cron
 
 on:
   schedule:
-    # Trigger Astro static site rebuild fallback every 4 hours (UTC)
-    - cron: '0 */4 * * *'
+    # Daily maintenance rebuild at midnight UTC (refreshes sitemaps & cleans up expired job statuses)
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
@@ -17,5 +17,5 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.PRIVATE_REPO_PAT }}" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             https://api.github.com/repos/rktiwari00/sarkari-space-astro/dispatches \
-            -d '{"event_type":"cron_dispatch","client_payload":{"reason":"scheduled_4h_cron"}}'
+            -d '{"event_type":"cron_dispatch","client_payload":{"reason":"scheduled_daily_cron"}}'
           echo "Dispatched cron_dispatch to rktiwari00/sarkari-space-astro successfully."
