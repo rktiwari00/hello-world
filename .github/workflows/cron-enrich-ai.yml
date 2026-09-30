@@ -39,4 +39,5 @@ jobs:
           R2_BUCKET_NAME: ${{ secrets.R2_BUCKET_NAME }}
           R2_PUBLIC_DOMAIN: ${{ secrets.R2_PUBLIC_DOMAIN }}
           NEXTAUTH_URL: "https://www.sarkari.space"
+          PRIVATE_REPO_PAT: ${{ secrets.PRIVATE_REPO_PAT }}
         run: npx tsx scripts/run-enrich-colleges.ts
