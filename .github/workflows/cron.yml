@@ -52,6 +52,7 @@ jobs:
           THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
           TWITTER_AUTH_TOKEN: ${{ secrets.TWITTER_AUTH_TOKEN }}
           TWITTER_CT0: ${{ secrets.TWITTER_CT0 }}
-          NEXTAUTH_URL: "https://www.sarkari.space"
+          NEXTAUTH_URL: "https://sarkari-space.pages.dev"
+          NEXT_PUBLIC_APP_URL: "https://sarkari-space.pages.dev"
           PRIVATE_REPO_PAT: ${{ secrets.PRIVATE_REPO_PAT }}
         run: npx tsx scripts/run-fetch-jobs.ts

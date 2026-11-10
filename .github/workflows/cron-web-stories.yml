@@ -33,6 +33,7 @@ jobs:
           NARAAI: ${{ secrets.NARAAI }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
-          NEXT_PUBLIC_APP_URL: "https://www.sarkari.space"
+          NEXT_PUBLIC_APP_URL: "https://sarkari-space.pages.dev"
+          PUBLIC_SITE_URL: "https://sarkari-space.pages.dev"
           PRIVATE_REPO_PAT: ${{ secrets.PRIVATE_REPO_PAT }}
         run: npx tsx scripts/run-generate-web-stories.ts

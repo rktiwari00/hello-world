@@ -38,6 +38,7 @@ jobs:
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           R2_BUCKET_NAME: ${{ secrets.R2_BUCKET_NAME }}
           R2_PUBLIC_DOMAIN: ${{ secrets.R2_PUBLIC_DOMAIN }}
-          NEXTAUTH_URL: "https://www.sarkari.space"
+          NEXTAUTH_URL: "https://sarkari-space.pages.dev"
+          NEXT_PUBLIC_APP_URL: "https://sarkari-space.pages.dev"
           PRIVATE_REPO_PAT: ${{ secrets.PRIVATE_REPO_PAT }}
         run: npx tsx scripts/run-enrich-colleges.ts
